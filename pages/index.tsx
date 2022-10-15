@@ -1,4 +1,7 @@
+import Layout from "@components/Layout/Layout";
 import React, { useState, useEffect } from "react";
+import Header from "@components/Header/Header";
+import ProductList from "@components/ProductList/ProductList";
 
 
 const HomePage = () => {
@@ -8,20 +11,16 @@ const HomePage = () => {
   useEffect(() => {
     window.fetch('api/avo')
       .then(response => response.json())
-      .then(({ data, length }) => {
+      .then(({ data }: TAPIAvoResponse) => {
         setProductList(data);
       })
   }, []);
 
   return (
-    <div>
-      <>
-        <h1>HelloWorld!</h1>
-        {productList.map((product) => (
-          <div>{product.name}</div>
-        ))}
-      </>
-    </div>
+    <Layout>
+      <Header />
+      <ProductList />
+    </Layout>
   );
 };
 

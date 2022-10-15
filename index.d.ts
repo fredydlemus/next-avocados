@@ -32,7 +32,3 @@ type TAPIAvoResponse = {
     data: TProduct[]
     error?: string
 }
-
-type Props = {
-    children: React.ReactNode;
-}
