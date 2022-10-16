@@ -59,7 +59,7 @@ function cartReducers(state: CartState, { item, type, quantity: qtyToAdd = 1 }: 
                 return state;
             }
 
-            const quantity = existingCartItem.quantity - qtyToAdd - 1;
+            const quantity = existingCartItem.quantity - qtyToAdd;
             if (quantity > 0) {
                 return {
                     ...state,
