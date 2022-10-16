@@ -14,8 +14,8 @@ export type CartAction = {
 
 const defaultState = {} as CartState;
 
-const CartItemsContext = React.createContext(defaultState);
-const CartDispatchContext = React.createContext((() => { }) as Dispatch<CartAction>);
+export const CartItemsContext = React.createContext(defaultState);
+export const CartDispatchContext = React.createContext((() => { }) as Dispatch<CartAction>);
 
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const [state, dispatch] = useReducer(cartReducers, defaultState);
@@ -81,48 +81,12 @@ function cartReducers(state: CartState, { item, type, quantity: qtyToAdd = 1 }: 
     }
 };
 
-const getCartSubTotal = (sum: number, item: CartItemType) => {
+export const getCartSubTotal = (sum: number, item: CartItemType) => {
     sum += item.price * item.quantity;
     return sum;
 }
 
-const getCartCount = (sum: number, item: CartItemType) => sum + item.quantity;
+export const getCartCount = (sum: number, item: CartItemType) => sum + item.quantity;
 
-export const useCart = () => {
-    const itemsById = useContext(CartItemsContext);
-    const items = Object.values(itemsById);
-    const count = items.reduce(getCartCount, 0);
-    const subTotal = items.reduce(getCartSubTotal, 0);
-
-    return {
-        items,
-        itemsById,
-        count,
-        subTotal
-    }
-}
-
-export const useCartMutations = () => {
-    const dispatch = useContext(CartDispatchContext);
-
-    const addToCart = (product: TProduct, quantity?: number) =>
-        dispatch({
-            type: 'add',
-            item: product,
-            quantity
-        });
-
-
-    const removeFromCart = (product: TProduct) =>
-        dispatch({
-            type: 'remove',
-            item: product
-        });
-
-    return {
-        addToCart,
-        removeFromCart
-    }
-}
 
 export default CartProvider;
