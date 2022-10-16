@@ -19,7 +19,7 @@ const HomePage = () => {
   return (
     <Layout>
       <Header />
-      <ProductList />
+      <ProductList products={productList} />
     </Layout>
   );
 };

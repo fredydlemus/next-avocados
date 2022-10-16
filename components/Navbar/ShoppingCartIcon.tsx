@@ -16,7 +16,7 @@ const ShoppingCartIcon = ({ cartCount, name }: ShoppingCartIcon) => {
         if (cartCount > 9) {
             return (
                 <span>
-                    9<sup>+</sup>
+                    (9<sup>+</sup>)
                 </span>
             );
         }

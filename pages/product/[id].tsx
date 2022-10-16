@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Layout from "@components/Layout/Layout";
+import ProductSummary from "@components/ProductSummary/ProductSummary";
 
 const ProductPage = () => {
   const {
@@ -17,10 +19,9 @@ const ProductPage = () => {
   }, [id]);
 
 
-  return <section>
-    <p>This is product page: {id}</p>
-    <div>{product?.name}</div>
-  </section>;
+  return <Layout>
+    {product == null ? null : <ProductSummary product={product} />}
+  </Layout>;
 };
 
 export default ProductPage;
