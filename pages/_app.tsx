@@ -1,4 +1,7 @@
 import { AppProps } from 'next/app';
+import 'semantic-ui-css/semantic.min.css';
+import '../global.css';
+import CartProvider from 'store/Cart';
 
 
 
@@ -7,7 +10,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     //Layout - Header, Footer, Sidebar, etc
     return (
 
-        <Component {...pageProps} />
+        <CartProvider>
+            <Component {...pageProps} />
+        </CartProvider>
 
     );
 }

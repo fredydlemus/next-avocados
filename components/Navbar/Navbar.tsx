@@ -4,11 +4,13 @@ import { useRouter } from "next/router";
 import { Menu, Container } from "semantic-ui-react";
 import { Avocado } from '@components/SVGIcons';
 import ShoppingCartIcon from "@components/Navbar/ShoppingCartIcon";
+import { useCart } from "store/Cart";
 
 
 const Navbar = () => {
 
   const { pathname } = useRouter();
+  const { count: cartCount } = useCart();
 
   return (
     <Menu size="huge" borderless pointing as="header">
@@ -25,7 +27,7 @@ const Navbar = () => {
         <Menu.Menu position="right">
           <Link href="/cart" passHref>
             <Menu.Item active={pathname === '/cart'}>
-              <ShoppingCartIcon cartCount={5} name="Basket" />
+              <ShoppingCartIcon cartCount={cartCount} name="Basket" />
             </Menu.Item>
           </Link>
         </Menu.Menu>
