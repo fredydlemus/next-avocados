@@ -8,7 +8,7 @@ const ModalHeaderContent = () => {
             <Grid columns={2}>
                 <Grid.Row verticalAlign='middle'>
                     <Grid.Column width='5'>
-                        <Die size='154px' />
+                        <Die size='120px' />
                     </Grid.Column>
                     <Grid.Column width='11'>
                         <Header as='h2'>You killed the avocado</Header>
@@ -20,7 +20,7 @@ const ModalHeaderContent = () => {
             </Grid>
             <style jsx>{`
                 .container {
-                    padding: 2rem;
+                    padding: 2rem 1rem;
                 }
             `}</style>
         </div>
