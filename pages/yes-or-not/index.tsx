@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '@components/Layout/Layout';
 import { Header, Button } from 'semantic-ui-react';
 import Link from 'next/link';
@@ -30,6 +30,16 @@ const index = ({ initialResult }: { initialResult: string }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [triggerCount, setTriggerCount] = useState(0);
 
+    useEffect(() => {
+        if (triggerCount > 0) {
+            setIsLoading(true);
+            fetchResult().then((result) => {
+                setResult(result);
+                setIsLoading(false);
+            });
+        }
+    }, [triggerCount])
+
     const onClick = () => {
         setTriggerCount(triggerCount + 1);
     }
@@ -43,6 +53,7 @@ const index = ({ initialResult }: { initialResult: string }) => {
                 <p>
                     <Button
                         color='green'
+                        onClick={onClick}
                         loading={isLoading}
                         disabled={isLoading}
                     >try again</Button>
