@@ -3,18 +3,18 @@ import React, { useState, useEffect } from "react";
 import Header from "@components/Header/Header";
 import ProductList from "@components/ProductList/ProductList";
 
+export const getServerSideProps = async () => {
+  const response = await fetch('https://avo-shop-xi.vercel.app/api/avo');
+  const { data: productList }: TAPIAvoResponse = await response.json();
 
-const HomePage = () => {
+  return {
+    props: {
+      productList,
+    }
+  }
+}
 
-  const [productList, setProductList] = useState<TProduct[]>([]);
-
-  useEffect(() => {
-    window.fetch('api/avo')
-      .then(response => response.json())
-      .then(({ data }: TAPIAvoResponse) => {
-        setProductList(data);
-      })
-  }, []);
+const HomePage = ({ productList }: { productList: TProduct[] }) => {
 
   return (
     <Layout>
