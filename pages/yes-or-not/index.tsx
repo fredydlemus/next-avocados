@@ -14,7 +14,7 @@ const fetchResult = async () => {
     return data;
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const initialResult = await fetchResult();
 
     return {
