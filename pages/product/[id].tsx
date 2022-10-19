@@ -1,23 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React from "react";
+import { GetStaticProps } from "next";
 import Layout from "@components/Layout/Layout";
 import ProductSummary from "@components/ProductSummary/ProductSummary";
 
-const ProductPage = () => {
-  const {
-    query: { id },
-  } = useRouter();
 
-  const [product, setProduct] = useState<TProduct | null>(null);
+export const getStaticPaths = async () => {
 
-  useEffect(() => {
-    window.fetch(`/api/avo/${id}`)
-      .then((response) => response.json())
-      .then((response) => {
-        setProduct(response);
-      });
-  }, [id]);
+  const response = await fetch('https://avo-shop-xi.vercel.app/api/avo');
+  const { data: productList }: TAPIAvoResponse = await response.json();
 
+  const paths = productList.map(({ id }) => ({
+    params: { id }
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const id = params?.id as string;
+  const response = await fetch(`https://avo-shop-xi.vercel.app/api/avo/${id}`);
+  const product: TProduct = await response.json();
+
+  return {
+    props: {
+      product,
+    }
+  }
+}
+
+const ProductPage = ({ product }: { product: TProduct }) => {
 
   return <Layout>
     {product == null ? null : <ProductSummary product={product} />}

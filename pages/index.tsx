@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Header from "@components/Header/Header";
 import ProductList from "@components/ProductList/ProductList";
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const response = await fetch('https://avo-shop-xi.vercel.app/api/avo');
   const { data: productList }: TAPIAvoResponse = await response.json();
 
